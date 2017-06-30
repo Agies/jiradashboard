@@ -4,18 +4,29 @@ import routing from './main.routes';
 
 export class MainController {
 
-  awesomeThings = [];
-
   /*@ngInject*/
-  constructor($http) {
+  constructor($http, storage) {
     this.$http = $http;
+    this.storage = storage;
   }
+  
+  sprint = 0;
+  blueCommit = 0;
+  redCommit = 0;
+  greenCommit = 0;
 
   $onInit() {
-    this.$http.get('/api/things')
-      .then(response => {
-        this.awesomeThings = response.data;
-      });
+    this.blueCommit = this.storage.get('bluecommit');
+    this.greenCommit = this.storage.get('greencommit');
+    this.redCommit = this.storage.get('redcommit');
+    this.sprint = this.storage.get('sprint');
+  }
+
+  save() {
+    this.storage.set('bluecommit', this.blueCommit);
+    this.storage.set('redcommit', this.greenCommit);
+    this.storage.set('greencommit', this.redCommit);
+    this.storage.set('sprint', this.sprint);
   }
 }
 

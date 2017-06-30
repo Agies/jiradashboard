@@ -1,0 +1,12 @@
+th {
+  font-size: 150%;
+}
+.progress {
+  height: 80px;
+  margin-bottom: 0px;
+}
+
+.progress span {
+  line-height: 80px;
+  font-size: 200%;
+}

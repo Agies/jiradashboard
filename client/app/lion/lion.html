@@ -1,0 +1,53 @@
+<header class="hero-unit" id="banner" style="background-color: {{$ctrl.name}}">
+    <div class="container">
+        <h1>{{$ctrl.name}} Lion Progress</h1>
+        <h2>Sprint Commit: {{$ctrl.commit}}pts</h2>
+    </div>
+</header>
+<div class="container-responsive">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: {{$ctrl.complete}}%; background-color: {{$ctrl.barColor}}">
+            <span>{{$ctrl.complete}}% Complete</span>
+        </div>
+    </div>
+</div>
+<div class="container-responsive">
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>Backlog</th>
+                        <th>Dev In Progress</th>
+                        <th>Ready To QA</th>
+                        <th>QA In Progress</th>
+                        <th>Ready For Review</th>
+                        <th>Done</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <card color="$ctrl.color" stats="$ctrl.stats['Ready']"></card>
+                        </td>
+                        <td>
+                            <card color="$ctrl.color" stats="$ctrl.stats['Development In Progress']"></card>
+                        </td>
+                        <td>
+                            <card color="$ctrl.color" stats="$ctrl.stats['Ready To QA']"></card>
+                        </td>
+                        <td>
+                            <card color="$ctrl.color" stats="$ctrl.stats['QA In Progress']"></card>
+                        </td>
+                        <td>
+                            <card color="$ctrl.color" stats="$ctrl.stats['Ready For Review']"></card>
+                        </td>
+                        <td>
+                            <card color="$ctrl.color" stats="$ctrl.stats['Done']"></card>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -43,7 +43,9 @@
 
 /* Component styles are injected through gulp */
 /* inject:css */
+@import 'lion/lion.css';
 @import 'main/main.css';
 @import '../components/footer/footer.css';
 @import '../components/modal/modal.css';
+@import '../components/card/card.css';
 /* endinject */
