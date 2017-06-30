@@ -51,6 +51,8 @@ module.exports = function makeWebpackConfig(options) {
 
                 'angular-ui-bootstrap',
                 'angular-ui-router',
+                'chart.js',
+                'angular-chart.js',
                 'lodash'
             ]
         };

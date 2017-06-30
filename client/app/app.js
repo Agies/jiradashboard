@@ -8,6 +8,7 @@ import ngSanitize from 'angular-sanitize';
 
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
+import ngCharts from 'angular-chart.js';
 
 import {
   routeConfig
@@ -24,7 +25,7 @@ import util from '../components/util/util.module';
 
 import './app.css';
 
-angular.module('jiradashboardApp', [ngCookies, ngResource, ngSanitize, uiRouter, uiBootstrap,
+angular.module('jiradashboardApp', [ngCookies, ngResource, ngSanitize, uiRouter, ngCharts, uiBootstrap,
   navbar, footer, card, main, lion, constants, util, storage
 ])
   .config(routeConfig);

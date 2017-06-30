@@ -45,7 +45,7 @@
 /* inject:css */
 @import 'lion/lion.css';
 @import 'main/main.css';
+@import '../components/card/card.css';
 @import '../components/footer/footer.css';
 @import '../components/modal/modal.css';
-@import '../components/card/card.css';
 /* endinject */
