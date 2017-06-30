@@ -7,14 +7,7 @@ let configWork = {
     apiVersion: '2',
     strictSSL: false
 }
-let configHome = {
-    protocol: 'https',
-    host: 'scoretestr.atlassian.net',
-    username: 'jerel.hass@gmail.com',
-    password: 'Jewel123',
-    apiVersion: '2',
-    strictSSL: false
-}
+
 let jira = new JiraAPI(configWork);
 
 var service = {
