@@ -11,26 +11,48 @@ let colorMap = {
 export class LionController {
   name = 'test';
   stats = null;
+  token = null;
 
   /*@ngInject*/
-  constructor($http, $stateParams, storage, Util) {
+  constructor($http, $stateParams, $interval, Util) {
     this.$http = $http;
     this.$stateParams = $stateParams;
-    this.storage = storage;
     this.util = Util;
+    this.$interval = $interval;
+  }
+
+  load() {
+    this.$http
+      .get('/api/lion') 
+      .then(result => {
+        this.commit = result.data[this.name.toLowerCase() + 'commit']
+        var sprint = result.data.sprint;
+        this.$http
+          .get(`/api/lion/${sprint}/${this.name}`)
+          .then(result => {
+            this.stats = result.data;
+            this.percent = parseInt(parseFloat(this.stats.Done.points) / parseFloat(this.commit) * 100);
+            if (this.percent > 100) {
+              this.complete = 100;
+            } else {
+              this.complete = this.percent;
+            }
+          });
+      });
   }
 
   $onInit() {
     this.name = this.$stateParams.name;
-    this.commit = this.storage.get(this.name + 'commit') || 0;
     this.color = colorMap[this.name];
     this.barColor = this.util.shadeColor(this.color, .50);
-    this.$http
-      .get(`/api/lion/${this.name}`)
-      .then(result => {
-        this.stats = result.data;
-        this.complete = parseInt(parseFloat(this.stats.Done.points) / parseFloat(this.commit) * 100);
-      });
+    this.load();
+    this.token = this.$interval(() => {
+      this.load();
+    }, 60000);
+  }
+
+  $onDestroy() {
+    this.$interval.cancel(this.token);
   }
 
   labels = ["Friday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Monday", "Tuesday", "Wednesday", "Thursday"];

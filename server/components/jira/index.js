@@ -15,7 +15,7 @@ let configHome = {
     apiVersion: '2',
     strictSSL: false
 }
-let jira = new JiraAPI(configHome);
+let jira = new JiraAPI(configWork);
 
 var service = {
     lionStats: function (sprint, lion) {
