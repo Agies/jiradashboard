@@ -19,9 +19,14 @@ export function UtilService($window) {
       return angular.isFunction(cb) ? cb : angular.noop;
     },
 
-    shadeColor(color, percent) {   
-      var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
-      return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
+    shadeColor(color, percent) {
+      var f = parseInt(color.slice(1), 16);
+      var t = percent < 0 ? 0 : 255;
+      var p = percent < 0 ? percent * -1 : percent;
+      var R = f >> 16;
+      var G = f >> 8 & 0x00FF;
+      var B = f & 0x0000FF;
+      return '#' + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
     },
 
     /**
@@ -61,8 +66,8 @@ export function UtilService($window) {
         // This part is when using well-known ports 80 or 443 with IE,
         // when $window.location.port==='' instead of the real port number.
         // Probably the same cause as this IE bug: https://goo.gl/J9hRta
-        let portCheck = url.port === o.port || o.port === '' && (url.port === '80' || url.port
-          === '443');
+        let portCheck = url.port === o.port || o.port === '' && (url.port === '80' || url.port ===
+          '443');
         return hostnameCheck && protocolCheck && portCheck;
       });
       return origins.length >= 1;

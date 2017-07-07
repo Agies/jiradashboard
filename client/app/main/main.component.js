@@ -9,7 +9,7 @@ export class MainController {
     this.$http = $http;
     this.storage = storage;
   }
-  
+
   sprint = 0;
   blueCommit = 0;
   redCommit = 0;
@@ -35,7 +35,7 @@ export class MainController {
         sprint: this.sprint
       })
       .then(result => {
-        console.log('Stats Saved!');
+        console.log('Stats Saved!', result);
       });
   }
 }

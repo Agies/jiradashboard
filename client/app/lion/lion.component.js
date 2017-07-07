@@ -6,7 +6,7 @@ let colorMap = {
   Red: '#ff0000',
   Blue: '#0000ff',
   Green: '#00ff00'
-}
+};
 
 export class LionController {
   name = 'test';
@@ -23,16 +23,16 @@ export class LionController {
 
   load() {
     this.$http
-      .get('/api/lion') 
+      .get('/api/lion')
       .then(result => {
         this.commit = result.data[this.name.toLowerCase() + 'commit']
         var sprint = result.data.sprint;
         this.$http
           .get(`/api/lion/${sprint}/${this.name}`)
-          .then(result => {
-            this.stats = result.data;
-            this.percent = parseInt(parseFloat(this.stats.Done.points) / parseFloat(this.commit) * 100);
-            if (this.percent > 100) {
+          .then(r => {
+            this.stats = r.data;
+            this.percent = parseInt(parseFloat(this.stats.Done.points) / parseFloat(this.commit) * 100, 0);
+            if(this.percent > 100) {
               this.complete = 100;
             } else {
               this.complete = this.percent;
@@ -48,14 +48,14 @@ export class LionController {
     this.load();
     this.token = this.$interval(() => {
       this.load();
-    }, 60000);
+    }, 60 * 1000);
   }
 
   $onDestroy() {
     this.$interval.cancel(this.token);
   }
 
-  labels = ["Friday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+  labels = ['Friday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'];
   series = ['Series A', 'Series B'];
   data = [
     [10, 12, 14, 15, 15, 18, 20, 22, 25, 30],
