@@ -1,6 +1,6 @@
 # jiradashboard
 
-A simple dashboard that collect the Agile Team's commit and current Sprint and will show their velocity trend in points.
+A simple dashboard that collects the Agile Team's commit and current Sprint and will show their velocity trend in points.
 
 ## Getting Started
 
