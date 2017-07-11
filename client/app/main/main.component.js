@@ -10,32 +10,29 @@ export class MainController {
     this.storage = storage;
   }
 
-  sprint = 0;
-  blueCommit = 0;
-  redCommit = 0;
-  greenCommit = 0;
+  data = {};
 
   $onInit() {
     this.$http
       .get('/api/lion')
       .then(result => {
-        this.blueCommit = result.data.bluecommit || 0;
-        this.greenCommit = result.data.greencommit || 0;
-        this.redCommit = result.data.redcommit || 0;
-        this.sprint = result.data.sprint || 0;
+        this.data = result.data || {};
+        if (result.data.startDate) {
+          this.data.startDate = new Date(result.data.startDate);
+        }
       });
   }
 
   save() {
+    console.log(this.data);
     this.$http
-      .post('/api/lion', {
-        bluecommit: this.blueCommit,
-        redcommit: this.redCommit,
-        greencommit: this.greenCommit,
-        sprint: this.sprint
-      })
+      .post('/api/lion', this.data)
       .then(result => {
         console.log('Stats Saved!', result);
+        this.data = result.data;
+        if (result.data.startDate) {
+          this.data.startDate = new Date(result.data.startDate);
+        }
       });
   }
 }

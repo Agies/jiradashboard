@@ -25,20 +25,49 @@ export class LionController {
     this.$http
       .get('/api/lion')
       .then(result => {
-        this.commit = result.data[this.name.toLowerCase() + 'commit']
+        this.commit = result.data[this.name.toLowerCase() + 'Commit']
         var sprint = result.data.sprint;
+        this.labels = [];
+        this.createDateRun(new Date(result.data.startDate), this.labels);
         this.$http
-          .get(`/api/lion/${sprint}/${this.name}`)
+          .get(`/api/lion/${result.data.startDate}/${this.name}`)
           .then(r => {
-            this.stats = r.data;
+            this.stats = r.data[r.data.length - 1];
+            this.data = [
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, null, null, null, null, null, null, null, null, this.commit]
+            ];
+            r.data.forEach(p => {
+              var index = -1;
+              if ((index = this.labels.indexOf(p.date)) >= 0) {
+                this.data[0][index] = p.Done.points;
+              }
+            });
+            if (!this.stats) {
+              this.percent = this.complete = 0;
+              return;
+            }
             this.percent = parseInt(parseFloat(this.stats.Done.points) / parseFloat(this.commit) * 100, 0);
-            if(this.percent > 100) {
+            if (this.percent > 100) {
               this.complete = 100;
             } else {
               this.complete = this.percent;
             }
           });
       });
+  }
+
+  createDateRun(startDate, labels) {
+    labels.push(addDays(startDate, 0));
+    labels.push(addDays(startDate, 3));
+    labels.push(addDays(startDate, 4));
+    labels.push(addDays(startDate, 5));
+    labels.push(addDays(startDate, 6));
+    labels.push(addDays(startDate, 7));
+    labels.push(addDays(startDate, 10));
+    labels.push(addDays(startDate, 11));
+    labels.push(addDays(startDate, 12));
+    labels.push(addDays(startDate, 13));
   }
 
   $onInit() {
@@ -56,11 +85,7 @@ export class LionController {
   }
 
   labels = ['Friday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'];
-  series = ['Series A', 'Series B'];
-  data = [
-    [10, 12, 14, 15, 15, 18, 20, 22, 25, 30],
-    [0, null, null, null, null, null, null, null, null, 34]
-  ];
+  series = ['Curent', 'Ideal'];
   options = {
     spanGaps: true,
     scales: {
@@ -75,7 +100,14 @@ export class LionController {
     }
   };
 }
-
+function addDays(date, days) {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return formatDate(result);
+}
+function formatDate(date) {
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+}
 export default angular.module('jiradashboardApp.lion', [uiRouter])
   .config(routing)
   .component('lion', {

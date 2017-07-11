@@ -11,21 +11,26 @@
       <form ng-submit="$ctrl.save()">
         <div class="form-group">
           <label for="sprint">Current Sprint</label>
-          <input type="number" class="form-control" id="sprint" placeholder="Sprint" ng-model="$ctrl.sprint">
+          <input type="number" class="form-control" id="sprint" placeholder="Sprint" ng-model="$ctrl.data.sprint">
+        </div>
+        <div class="form-group">
+          <label for="startdate">Start Date</label>
+          <input type="date" class="form-control" id="startdate" placeholder="Start Date" ng-model="$ctrl.data.startDate">
         </div>
         <div class="form-group">
           <label for="bluecommit">Blue Commit</label>
-          <input type="number" class="form-control" id="bluecommit" placeholder="Blue Commit" ng-model="$ctrl.blueCommit">
-        </div>
-        <div class="form-group">
-          <label for="redcommit">Red Commit</label>
-          <input type="number" class="form-control" id="redcommit" placeholder="Red Commit" ng-model="$ctrl.redCommit">
+          <input type="number" class="form-control" id="bluecommit" placeholder="Blue Commit" ng-model="$ctrl.data.blueCommit">
         </div>
         <div class="form-group">
           <label for="greencommit">Green Commit</label>
-          <input type="number" class="form-control" id="greencommit" placeholder="Green Commit" ng-model="$ctrl.greenCommit">
+          <input type="number" class="form-control" id="greencommit" placeholder="Green Commit" ng-model="$ctrl.data.greenCommit">
+        </div>
+        <div class="form-group">
+          <label for="redcommit">Red Commit</label>
+          <input type="number" class="form-control" id="redcommit" placeholder="Red Commit" ng-model="$ctrl.data.redCommit">
         </div>
         <button type="submit" class="btn btn-default">Save</button>
+        <span class="small">{{$ctrl.data._id}}</span>
       </form>
     </div>
   </div>
