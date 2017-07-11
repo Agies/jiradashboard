@@ -17,6 +17,7 @@
             <table class="table table-responsive">
                 <thead>
                     <tr>
+                        <th ng-if="$ctrl.stats['Unpointed']">Unpointed</th>
                         <th>Backlog</th>
                         <th>Dev In Progress</th>
                         <th>Ready To QA</th>
@@ -27,6 +28,9 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td ng-if="$ctrl.stats['Unpointed']">
+                            <card color="$ctrl.color" stats="$ctrl.stats['Unpointed']"></card>
+                        </td>
                         <td>
                             <card color="$ctrl.color" stats="$ctrl.stats['Ready']"></card>
                         </td>
