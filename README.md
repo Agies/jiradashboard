@@ -1,6 +1,6 @@
 # jiradashboard
 
-This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.2.2.
+A simple dashboard that collect the Agile Team's commit and current Sprint and will show their velocity trend in points.
 
 ## Getting Started
 
