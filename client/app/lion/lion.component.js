@@ -49,10 +49,12 @@ export class LionController {
             r.data.stats.forEach(p => {
               var index = -1;
               if ((index = this.labels.indexOf(p.date)) >= 0) {
-                this.data[0][index] = p.Done.points;
+                if (p.Done) {
+                  this.data[0][index] = p.Done.points;
+                }
               }
             });
-            if (!this.stats) {
+            if (!this.stats || !this.stats.Done) {
               this.percent = this.complete = 0;
               return;
             }
@@ -69,6 +71,9 @@ export class LionController {
   $onInit() {
     this.name = this.$stateParams.name;
     this.color = colorMap[this.name];
+    if (!this.color) {
+      this.color = '#000000';
+    } 
     this.barColor = this.util.shadeColor(this.color, .50);
     this.load();
   }

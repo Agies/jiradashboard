@@ -11,6 +11,7 @@ export default function(app) {
   // Insert routes below
   app.use('/api/lion', require('./api/lion'));
   app.use('/api/queries', require('./api/queries'));
+  app.use('/api/epic', require('./api/epic'));
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
