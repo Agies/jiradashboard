@@ -37,10 +37,15 @@ export class LionController {
           .then(r => {
             this.stats = r.data.stats[r.data.stats.length - 1];
             this.labels = r.data.range;
+            const days = this.labels.length;
             this.data = [
-              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-              [0, null, null, null, null, null, null, null, null, this.commit]
+              [10],
+              []
             ];
+            const pro = this.commit / (days - 1);
+            for (var i = 0; i < days; i++) {
+              this.data[1].push(pro * i);
+            }
             r.data.stats.forEach(p => {
               var index = -1;
               if ((index = this.labels.indexOf(p.date)) >= 0) {
@@ -74,7 +79,7 @@ export class LionController {
   labels = [];
   series = ['Curent', 'Ideal'];
   options = {
-    spanGaps: true,
+    spanGaps: false,
     scales: {
       yAxes: [
         {

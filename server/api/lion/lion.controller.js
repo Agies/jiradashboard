@@ -18,7 +18,7 @@ export function index(req, res) {
   range.push(addDays(startDate, 12));
   range.push(addDays(startDate, 13));
   var query = {
-    lion: req.params.lion,
+    key: req.params.key,
     date: {
       $in: range
     }
@@ -32,42 +32,19 @@ export function index(req, res) {
         stats
       });
     })
-    .then(null, () => {
-      var obj = {};
-      obj.Ready = {
-        points: 10,
-        count: 5
-      };
-      obj['Development In Progress'] = {
-        points: 10,
-        count: 5
-      };
-      obj['Ready To QA'] = {
-        points: 10,
-        count: 5
-      };
-      obj['QA In Progress'] = {
-        points: 10,
-        count: 5
-      };
-      obj['Ready For Review'] = {
-        points: 10,
-        count: 5
-      };
-      obj.Done = {
-        points: 10,
-        count: 5
-      };
-      res.json(obj);
+    .then(null, error => {
+      res.status(500).json({error});
     });
 }
 
 export function save(req, res) {
   var data = req.body;
+  var key = req.params.key;
+  data.key = key;
   data.date = formatDate(new Date());
   db.findAndUpdate({
     date: data.date,
-    lion: data.lion
+    key: data.key
   }, data)
     .then(r => {
       res.json(data);

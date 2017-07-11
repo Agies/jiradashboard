@@ -5,8 +5,8 @@ var controller = require('./lion.controller');
 
 var router = express.Router();
 
-router.get('/:sprint/:lion', controller.index);
-router.put('/', controller.save);
+router.get('/:sprint/:key', controller.index);
+router.put('/:key', controller.save);
 router.post('/', controller.update);
 router.get('/', controller.load);
 
