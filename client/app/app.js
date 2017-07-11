@@ -22,11 +22,12 @@ import main from './main/main.component';
 import lion from './lion/lion.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
+import socket from '../components/socket.service';
 
 import './app.css';
 
 angular.module('jiradashboardApp', [ngCookies, ngResource, ngSanitize, uiRouter, ngCharts, uiBootstrap,
-  navbar, footer, card, main, lion, constants, util, storage
+  navbar, footer, card, main, lion, constants, util, storage, socket
 ])
   .config(routeConfig);
 

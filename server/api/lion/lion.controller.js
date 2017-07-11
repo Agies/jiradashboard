@@ -2,8 +2,7 @@
 const data = require('../../components/data');
 const db = new data.DB('lion');
 const config = new data.DB('lionConfig');
-const storage = require('../../components/storage');
-const fileName = 'lionConfig';
+const io = require('../../components/websocket');
 
 export function index(req, res) {
   const startDate = req.params.sprint;
@@ -27,8 +26,11 @@ export function index(req, res) {
   console.log('Querying: ', query);
   db
     .find(query)
-    .then(result => {
-      res.json(result);
+    .then(stats => {
+      res.json({
+        range,
+        stats
+      });
     })
     .then(null, () => {
       var obj = {};
@@ -62,15 +64,14 @@ export function index(req, res) {
 
 export function save(req, res) {
   var data = req.body;
-  const now = new Date();
-  const date = `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()}`;
-  data.date = date;
+  data.date = formatDate(new Date());
   db.findAndUpdate({
     date: data.date,
     lion: data.lion
   }, data)
     .then(r => {
       res.json(data);
+      io.broadcast('stats', data);
     }, err => {
       res.status(500).json({
         error: err
@@ -96,6 +97,7 @@ export function update(req, res) {
     .save(req.body)
     .then(data => {
       res.json(req.body);
+      io.broadcast('config', req.body);
     }, err => {
       res.status(500).json({
         error: err
