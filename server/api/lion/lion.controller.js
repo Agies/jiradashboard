@@ -4,6 +4,7 @@ const db = new data.DB('lion');
 const config = new data.DB('lionConfig');
 const storage = require('../../components/storage');
 const fileName = 'lionConfig';
+
 export function index(req, res) {
   const startDate = req.params.sprint;
   var range = [];
@@ -18,10 +19,10 @@ export function index(req, res) {
   range.push(addDays(startDate, 12));
   range.push(addDays(startDate, 13));
   var query = {
-      lion: req.params.lion,
-      date: {
-        $in: range
-      }
+    lion: req.params.lion,
+    date: {
+      $in: range
+    }
   };
   console.log('Querying: ', query);
   db
@@ -56,6 +57,24 @@ export function index(req, res) {
         count: 5
       };
       res.json(obj);
+    });
+}
+
+export function save(req, res) {
+  var data = req.body;
+  const now = new Date();
+  const date = `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()}`;
+  data.date = date;
+  db.findAndUpdate({
+    date: data.date,
+    lion: data.lion
+  }, data)
+    .then(r => {
+      res.json(data);
+    }, err => {
+      res.status(500).json({
+        error: err
+      });
     });
 }
 
