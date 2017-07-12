@@ -1,6 +1,9 @@
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>Team Progress</h1>
+    <h1>
+      Team Progress
+      <span class="small">{{$ctrl.lastUpdate}}</span>
+    </h1>
   </div>
 </header>
 
@@ -29,7 +32,7 @@
           <label for="redcommit">Red Commit</label>
           <input type="number" class="form-control" id="redcommit" placeholder="Red Commit" ng-model="$ctrl.data.redCommit">
         </div>
-        <button type="submit" class="btn btn-default">Save</button>
+        <button type="submit" class="btn btn-default">Save</button> <br /><br/>
         <span class="small">{{$ctrl.data._id}}</span>
       </form>
     </div>

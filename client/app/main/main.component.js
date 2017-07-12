@@ -5,10 +5,13 @@ import routing from './main.routes';
 export class MainController {
 
   /*@ngInject*/
-  constructor($http, storage, Modal) {
+  constructor($http, $scope, storage, Modal) {
     this.$http = $http;
     this.storage = storage;
     this.modal = Modal;
+    $scope.$on('pulse', (event, data) => {
+      this.lastUpdate = data.lastUpdate;
+    });
   }
 
   data = {};
@@ -19,7 +22,7 @@ export class MainController {
       .get('/api/lion')
       .then(result => {
         this.data = result.data || {};
-        if(result.data.startDate) {
+        if (result.data.startDate) {
           this.data.startDate = new Date(result.data.startDate);
         }
       }, error => {
@@ -36,7 +39,7 @@ export class MainController {
       .post('/api/lion', this.data)
       .then(result => {
         this.data = result.data;
-        if(result.data.startDate) {
+        if (result.data.startDate) {
           this.data.startDate = new Date(result.data.startDate);
         }
       }, error => {

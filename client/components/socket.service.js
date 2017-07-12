@@ -30,6 +30,12 @@ export function socketService($rootScope, $timeout) {
       $rootScope.$broadcast(stats, data);
     }, 1);
   });
+  socket.on('pulse', data => {
+    console.log('pulse', data);
+    $timeout(() => {
+      $rootScope.$broadcast('pulse', data);
+    }, 1);
+  });
   var service = {
     events: {
       config,

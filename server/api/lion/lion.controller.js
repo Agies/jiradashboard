@@ -49,10 +49,13 @@ export function save(req, res) {
   }, body)
     .then(() => {
       res.json(body);
-      pulse.update({}, {
+      var pulseModel = {
         lastUpdate: new Date(),
         key: body.key,
-      }).then(null, e => {
+      };
+      pulse.update({}, pulseModel).then(() => {
+        io.broadcast('pulse', pulseModel);
+      }, e => {
         console.error(e);
       });
       io.broadcast('stats', body);
