@@ -5,10 +5,11 @@ import routing from './main.routes';
 export class MainController {
 
   /*@ngInject*/
-  constructor($http, $scope, storage, Modal) {
+  constructor($http, $scope, storage, Modal, socket) {
     this.$http = $http;
     this.storage = storage;
     this.modal = Modal;
+    this.socket = socket;
     $scope.$on('pulse', (event, data) => {
       this.lastUpdate = data.lastUpdate;
     });
