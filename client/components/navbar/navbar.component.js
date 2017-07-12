@@ -17,13 +17,13 @@ export class NavbarComponent {
     title: 'Red',
     state: 'lion({name: "Red"})'
   }, {
-    title: 'Frictionless <beta>',
+    title: 'Frictionless',
     state: 'epic({name: "Frictionless"})'
   }, {
-    title: 'Payments <beta>',
+    title: 'Payments',
     state: 'epic({name: "eNAC1"})'
   }, {
-    title: 'Transactions <beta>',
+    title: 'Transactions',
     state: 'epic({name: "eNAC2"})'
   }];
   isCollapsed = true;

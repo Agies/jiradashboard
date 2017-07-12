@@ -83,6 +83,9 @@ export class LionController {
   series = ['Current', 'Ideal'];
   options = {
     spanGaps: false,
+    legend: {
+      display: true
+    },
     scales: {
       yAxes: [{
         id: 'y-axis-1',

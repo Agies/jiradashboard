@@ -1,11 +1,13 @@
 <header class="hero-unit" id="banner" style="background-color: {{$ctrl.color}}">
     <div class="container hidden-xs">
         <h1>{{$ctrl.name}} Progress</h1>
-        <h2>{{$ctrl.total}}pts</h2>
+        <h2>{{$ctrl.done}} of {{$ctrl.total}} Points<br/>
+            <span class="small">{{$ctrl.finished}} of {{$ctrl.count}} Cards</span>
+        </h2>
     </div>
     <div class="container visible-xs">
         <h3>{{$ctrl.name}} Progress</h3>
-        <h4>{{$ctrl.total}}pts</h4>
+        <h4>{{$ctrl.done}}pts of {{$ctrl.total}}pts Done</h4>
     </div>
 </header>
 <div class="container-responsive">
@@ -45,16 +47,17 @@
                 </tbody>
             </table>
             <div class="row visible-xs" style="margin-bottom: 20px;">
-                <div class="col-xs-3">
+                <div class="col-xs-6">
                     <h3>In Progress</h3>
                     <card color="$ctrl.color" stats="$ctrl.stats['In Progress']"></card>
                 </div>
-                <div class="col-xs-3">
+                <div class="col-xs-6">
                     <h3>Done</h3>
                     <card color="$ctrl.color" stats="$ctrl.stats['Done']"></card>
                 </div>
             </div>
-            <canvas id="line" class="chart chart-line" chart-data="$ctrl.data" chart-labels="$ctrl.labels" chart-series="$ctrl.series" chart-options="$ctrl.options"
+            <h1>Growth vs Burn</h1>
+            <canvas id="line" class="chart chart-bar" chart-data="$ctrl.data" chart-labels="$ctrl.labels" chart-series="$ctrl.series" chart-options="$ctrl.options"
                 chart-dataset-override="$ctrl.datasetOverride" chart-click="$ctrl.onClick" height="90px">
             </canvas>
         </div>
