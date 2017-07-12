@@ -25,7 +25,7 @@ export function index(req, res) {
   };
   console.log('Querying: ', query);
   db
-    .find(query)
+    .find(query, { lastUpdate: 1 })
     .then(stats => {
       res.json({
         range,
@@ -38,17 +38,17 @@ export function index(req, res) {
 }
 
 export function save(req, res) {
-  var data = req.body;
+  var body = req.body;
   var key = req.params.key;
-  data.key = key;
-  data.date = formatDate(new Date());
+  body.key = key;
+  body.date = formatDate(new Date());
   db.findAndUpdate({
-    date: data.date,
-    key: data.key
-  }, data)
-    .then(r => {
-      res.json(data);
-      io.broadcast('stats', data);
+    date: body.date,
+    key: body.key
+  }, body)
+    .then(() => {
+      res.json(body);
+      io.broadcast('stats', body);
     }, err => {
       res.status(500).json({
         error: err
@@ -59,8 +59,8 @@ export function save(req, res) {
 export function load(req, res) {
   config
     .find()
-    .then(data => {
-      res.json(data[0]);
+    .then(result => {
+      res.json(result[0]);
     }, err => {
       console.error(err);
       res.status(500).json({
@@ -72,7 +72,7 @@ export function load(req, res) {
 export function update(req, res) {
   config
     .save(req.body)
-    .then(data => {
+    .then(() => {
       res.json(req.body);
       io.broadcast('config', req.body);
     }, err => {

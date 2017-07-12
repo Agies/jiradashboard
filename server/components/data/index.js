@@ -6,7 +6,7 @@ export class DB {
   constructor(collectionName) {
     this.collectionName = collectionName;
   }
-  find(filter, projection) {
+  find(filter, sort, projection) {
     var connection = null;
     return mongodb.connect(uri)
       .then(db => {
@@ -15,7 +15,10 @@ export class DB {
       })
       .then(collection => {
         var cursor = collection.find(filter);
-        if (projection) {
+        if(sort) {
+          cursor = cursor.sort(sort);
+        }
+        if(projection) {
           cursor = cursor.project(projection);
         }
         return cursor.toArray();
@@ -37,7 +40,7 @@ export class DB {
       })
       .then(collection => {
         var promise = null;
-        if (data._id) {
+        if(data._id) {
           data._id = new ObjectId(data._id);
           data.lastUpdate = new Date();
           promise = collection.updateOne({

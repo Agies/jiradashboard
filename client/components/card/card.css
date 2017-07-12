@@ -4,3 +4,9 @@
   padding: 10px;
   font-size: 200%;
 }
+
+@media (max-width: 400px) {
+  .stat-card {
+      font-size: 100%;
+  }
+}

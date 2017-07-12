@@ -31,7 +31,6 @@ export class LionController {
       .get('/api/lion')
       .then(result => {
         this.commit = result.data[this.name.toLowerCase() + 'Commit']
-        var sprint = result.data.sprint;
         this.$http
           .get(`/api/lion/${result.data.startDate}/${this.name}`)
           .then(r => {
@@ -73,27 +72,24 @@ export class LionController {
     this.color = colorMap[this.name];
     if (!this.color) {
       this.color = '#000000';
-    } 
+    }
     this.barColor = this.util.shadeColor(this.color, .50);
     this.load();
   }
 
-  $onDestroy() {
-  }
+  $onDestroy() {}
 
   labels = [];
   series = ['Curent', 'Ideal'];
   options = {
     spanGaps: false,
     scales: {
-      yAxes: [
-        {
-          id: 'y-axis-1',
-          type: 'linear',
-          display: true,
-          position: 'left'
-        }
-      ]
+      yAxes: [{
+        id: 'y-axis-1',
+        type: 'linear',
+        display: true,
+        position: 'left'
+      }]
     }
   };
 }

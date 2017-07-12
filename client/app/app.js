@@ -16,6 +16,7 @@ import {
 
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
+import modal from '../components/modal/modal.service';
 import card from '../components/card/card.component';
 import storage from './storage/storage.service';
 import main from './main/main.component';
@@ -27,7 +28,7 @@ import socket from '../components/socket.service';
 import './app.css';
 
 angular.module('jiradashboardApp', [ngCookies, ngResource, ngSanitize, uiRouter, ngCharts, uiBootstrap,
-  navbar, footer, card, main, lion, constants, util, storage, socket
+  navbar, footer, card, main, lion, constants, util, storage, socket, modal
 ])
   .config(routeConfig);
 

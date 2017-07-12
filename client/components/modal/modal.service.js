@@ -2,6 +2,7 @@
 
 import angular from 'angular';
 
+/*@ngInject*/
 export function Modal($rootScope, $uibModal) {
   /**
    * Opens a modal
@@ -23,10 +24,21 @@ export function Modal($rootScope, $uibModal) {
 
   // Public API here
   return {
-
+    alert: {
+      spinner() {
+        var modal;
+        modal = openModal({
+          modal: {
+            dismissable: false,
+            title: 'Loading Data',
+            html: 'Please Wait Data Loading...'
+          },
+        });
+        return modal;
+      }
+    },
     /* Confirmation modals */
     confirm: {
-
       /**
        * Create a function to open a delete confirmation modal (ex. ng-click='myModalFn(name, arg1, arg2...)')
        * @param  {Function} del - callback, ran when delete is confirmed
@@ -38,7 +50,7 @@ export function Modal($rootScope, $uibModal) {
          * @param  {String} name   - name or info to show on modal
          * @param  {All}           - any additional args are passed straight to del callback
          */
-        return function(...args) {
+        return function (...args) {
           var slicedArgs = Reflect.apply(Array.prototype.slice, args);
           var name = slicedArgs.shift();
           var deleteModal;
@@ -64,7 +76,7 @@ export function Modal($rootScope, $uibModal) {
             }
           }, 'modal-danger');
 
-          deleteModal.result.then(function(event) {
+          deleteModal.result.then(function (event) {
             Reflect.apply(del, event, slicedArgs);
           });
         };

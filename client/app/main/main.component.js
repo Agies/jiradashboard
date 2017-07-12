@@ -5,34 +5,45 @@ import routing from './main.routes';
 export class MainController {
 
   /*@ngInject*/
-  constructor($http, storage) {
+  constructor($http, storage, Modal) {
     this.$http = $http;
     this.storage = storage;
+    this.modal = Modal;
   }
 
   data = {};
 
   $onInit() {
+    var modal = this.modal.alert.spinner();
     this.$http
       .get('/api/lion')
       .then(result => {
         this.data = result.data || {};
-        if (result.data.startDate) {
+        if(result.data.startDate) {
           this.data.startDate = new Date(result.data.startDate);
         }
+      }, error => {
+        console.error(error);
+      })
+      .then(() => {
+        modal.close();
       });
   }
 
   save() {
-    console.log(this.data);
+    var modal = this.modal.alert.spinner();
     this.$http
       .post('/api/lion', this.data)
       .then(result => {
-        console.log('Stats Saved!', result);
         this.data = result.data;
-        if (result.data.startDate) {
+        if(result.data.startDate) {
           this.data.startDate = new Date(result.data.startDate);
         }
+      }, error => {
+        console.error(error);
+      })
+      .then(() => {
+        modal.close();
       });
   }
 }
