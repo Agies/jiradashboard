@@ -2,6 +2,7 @@
 const data = require('../../components/data');
 const db = new data.DB('lion');
 const config = new data.DB('lionConfig');
+const pulse = new data.DB('pusherPulse');
 const io = require('../../components/websocket');
 
 export function index(req, res) {
@@ -48,6 +49,12 @@ export function save(req, res) {
   }, body)
     .then(() => {
       res.json(body);
+      pulse.update({}, {
+        lastUpdate: new Date(),
+        key: body.key,
+      }).then(null, e => {
+        console.error(e);
+      });
       io.broadcast('stats', body);
     }, err => {
       res.status(500).json({
