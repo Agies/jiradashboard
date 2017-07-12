@@ -1,0 +1,62 @@
+<header class="hero-unit" id="banner" style="background-color: {{$ctrl.color}}">
+    <div class="container hidden-xs">
+        <h1>{{$ctrl.name}} Progress</h1>
+        <h2>{{$ctrl.total}}pts</h2>
+    </div>
+    <div class="container visible-xs">
+        <h3>{{$ctrl.name}} Progress</h3>
+        <h4>{{$ctrl.total}}pts</h4>
+    </div>
+</header>
+<div class="container-responsive">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: {{$ctrl.complete}}%; background-color: {{$ctrl.barColor}}">
+            <span>{{$ctrl.percent}}% Complete</span>
+        </div>
+    </div>
+</div>
+<div class="container-responsive">
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-responsive hidden-xs">
+                <thead>
+                    <tr>
+                        <th>Unpointed</th>
+                        <th>Backlog</th>
+                        <th>In Progress</th>
+                        <th>Done</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <card color="$ctrl.color" stats="$ctrl.stats['Unpointed']"></card>
+                        </td>
+                        <td>
+                            <card color="$ctrl.color" stats="$ctrl.stats['Backlog']"></card>
+                        </td>
+                        <td>
+                            <card color="$ctrl.color" stats="$ctrl.stats['In Progress']"></card>
+                        </td>
+                        <td>
+                            <card color="$ctrl.color" stats="$ctrl.stats['Done']"></card>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row visible-xs" style="margin-bottom: 20px;">
+                <div class="col-xs-3">
+                    <h3>In Progress</h3>
+                    <card color="$ctrl.color" stats="$ctrl.stats['In Progress']"></card>
+                </div>
+                <div class="col-xs-3">
+                    <h3>Done</h3>
+                    <card color="$ctrl.color" stats="$ctrl.stats['Done']"></card>
+                </div>
+            </div>
+            <canvas id="line" class="chart chart-line" chart-data="$ctrl.data" chart-labels="$ctrl.labels" chart-series="$ctrl.series" chart-options="$ctrl.options"
+                chart-dataset-override="$ctrl.datasetOverride" chart-click="$ctrl.onClick" height="90px">
+            </canvas>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,6 @@
 'use strict';
 const data = require('../../components/data');
 const db = new data.DB('lion');
-const io = require('../../components/websocket');
 
 export function index(req, res) {
   var query = {
@@ -9,7 +8,7 @@ export function index(req, res) {
   };
   console.log('Querying: ', query);
   db
-    .find(query)
+    .find(query, { lastUpdate: 1 })
     .then(stats => {
       res.json({
         stats

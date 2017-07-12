@@ -18,13 +18,13 @@ export class NavbarComponent {
     state: 'lion({name: "Red"})'
   }, {
     title: 'Frictionless <beta>',
-    state: 'lion({name: "Frictionless"})'
+    state: 'epic({name: "Frictionless"})'
   }, {
     title: 'Payments <beta>',
-    state: 'lion({name: "eNAC1"})'
+    state: 'epic({name: "eNAC1"})'
   }, {
     title: 'Transactions <beta>',
-    state: 'lion({name: "eNAC2"})'
+    state: 'epic({name: "eNAC2"})'
   }];
   isCollapsed = true;
 }

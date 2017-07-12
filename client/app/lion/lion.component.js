@@ -80,7 +80,7 @@ export class LionController {
   $onDestroy() {}
 
   labels = [];
-  series = ['Curent', 'Ideal'];
+  series = ['Current', 'Ideal'];
   options = {
     spanGaps: false,
     scales: {

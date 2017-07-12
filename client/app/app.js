@@ -21,6 +21,7 @@ import card from '../components/card/card.component';
 import storage from './storage/storage.service';
 import main from './main/main.component';
 import lion from './lion/lion.component';
+import epic from './epic/epic.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket.service';
@@ -28,7 +29,7 @@ import socket from '../components/socket.service';
 import './app.css';
 
 angular.module('jiradashboardApp', [ngCookies, ngResource, ngSanitize, uiRouter, ngCharts, uiBootstrap,
-  navbar, footer, card, main, lion, constants, util, storage, socket, modal
+  navbar, footer, card, main, lion, epic, constants, util, storage, socket, modal
 ])
   .config(routeConfig);
 
