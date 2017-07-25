@@ -25,6 +25,9 @@ export class NavbarComponent {
   }, {
     title: 'Transactions',
     state: 'epic({name: "eNAC2"})'
+  }, {
+    title: 'Profile',
+    state: 'epic({name: "eNAC3"})'
   }];
   isCollapsed = true;
 }

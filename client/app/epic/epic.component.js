@@ -6,14 +6,14 @@ export class EpicController {
   name = 'test';
   stats = null;
   labels = [];
-  series = ['Growth', 'Burn Down'];
+  series = ['Backlog', 'Burn Down'];
   options = {
     legend: {
       display: true
     }
   };
   datasetOverride = [{
-    type: 'bar'
+    type: 'line'
   }, {
     type: 'line'
   }];
